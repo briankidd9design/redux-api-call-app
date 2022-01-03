@@ -79,8 +79,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 the action will be sent to Redux thunk, as the Middleware
 6. After it is sent to Redux thunk, it is sent to all of the different reducers
 7. With thunk as middleware, action creators are not restricted to returning objects but can also return a function
-8. If a function is returned, like say for an API call, it would be called with the dispatch and getState arguments, which gives total control over changing or getting information from the Redux store
+8. If a function is returned, like say for an API call, it would be called with the dispatch and getState arguments, which gives total control over changing or getting information from the Redux store 
 9. The action creator will look something like:
+
     export const fetchPosts = () => async dispatch => {
         const response = await jsonPlaceholder.get('/posts');
         dispatch ({ type: 'FETCH_POSTS', payload: response.data });
@@ -93,6 +94,7 @@ the action will be sent to Redux thunk, as the Middleware
     }
 10. You can also use an action creator that calls other action creators:
     here is an example using the lodash library
+
         export const fetchPostsAndUsers = () => async (dispatch, getState) => {
             await dispatch(fetchPosts());
 
@@ -102,7 +104,9 @@ the action will be sent to Redux thunk, as the Middleware
                 .forEach(id => dispatch(fetchUser(id)))
                 .value();
         }
+
 11. Reducers that keep track of state:
+
         export default (state = [], action) => {
             switch (action.type) {
                 case 'FETCH_USER':
@@ -111,6 +115,7 @@ the action will be sent to Redux thunk, as the Middleware
                     return state;
             }
         };
+
 12. For reducers, the first argument is referred to as state, which is whatever is returned from the reducer last time it ran
 13. A switch statement is commonly used for reducers
 14. Anytime new data is returned, we need to return a new array, object, or string, number so that Redux will realize we made a change to the data inside the application
